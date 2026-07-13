@@ -2,8 +2,10 @@ name: Envizom API Monitor
 
 on:
   schedule:
-    # Runs once every hour, 24/7, on the hour. GitHub uses UTC time for cron schedules.
-    - cron: "0 * * * *"
+    # GitHub Actions cron always runs in UTC - there's no native IST setting.
+    # IST = UTC + 5:30, so triggering at :30 UTC lands exactly on the hour in IST
+    # (e.g. 00:30 UTC = 06:00 IST, 01:30 UTC = 07:00 IST, etc.)
+    - cron: "30 * * * *"
   workflow_dispatch: {}  # lets you manually trigger a run from the Actions tab
 
 jobs:
